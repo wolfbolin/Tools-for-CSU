@@ -55,3 +55,17 @@ json文件样例：
 （没有写入防止错误输入的代码，请自行确认信息的正确性）
 
 **运行环境 python3以及相关插件**
+
+## 移动网络断网重连
+
+这个小工具能自动监测网络状态，并在掉线后能自动重连。（仅适用于中南大学中国移动网络）
+
+此版本针对于 Linux 平台编写，并且需要用户自行设计计时器反复调用，已针对Python2与Python3进行优化。
+
+**多平台**
+
+Linux：<https://github.com/wolfbolin/csu-keep-online>
+
+MacOS：<https://github.com/fr0der1c/always-online>
+
+操作说明见相关文件夹
