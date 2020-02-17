@@ -38,8 +38,9 @@ def sign_in():
             "User-Agent": "Python scripts by wolfbolin",
             "Cookie": cookies
         }
-        sign_data["created"] = unix_time()
+        sign_data["id"] = int(sign_data["id"])
         sign_data["date"] = str_time("%Y%m%d")
+        sign_data["created"] = unix_time()
 
         http_result = requests.post(url, data=sign_data, headers=headers, timeout=(2, 30))
         return http_result.text
