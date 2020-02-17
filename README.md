@@ -4,8 +4,37 @@
 
 现有项目：
 
+* 移动网络断网重连
+* 每日健康定时签到
 * 文件批量重命名工具
+
 * 近代史在线听课代刷程序
+
+## 移动网络断网重连
+
+这个小工具能自动监测网络状态，并在掉线后能自动重连。（仅适用于中南大学中国移动网络）
+
+此版本针对于 Linux 平台编写，并且需要用户自行设计计时器反复调用，已针对Python2与Python3进行优化。
+
+**多平台**
+
+Linux：<https://github.com/wolfbolin/csu-keep-online>
+
+MacOS：<https://github.com/fr0der1c/always-online>
+
+操作说明见相关文件夹
+
+## nCOV疫情期间签到脚本
+
+在指定时间自动完成签到，我真的不想每天定闹钟签到了
+
+配置修改方案详见截图
+
+![Cookies](./src/nCOV-sign-in/Cookies.png)
+
+![Data](./src/nCOV-sign-in/初始信息获取.png)
+
+
 
 ## 批量重命名工具
 
@@ -40,7 +69,7 @@ json文件样例：
 
 **运行环境 python3以及相关插件**
 
-## 网络安全知识竞赛刷题程序
+## 网络安全知识竞赛刷题程序（已过期）
 
 在使用软件之前请先登录网络安全知识竞赛系统http://yiban.csu.edu.cn/csuNSKC/
 
@@ -56,16 +85,3 @@ json文件样例：
 
 **运行环境 python3以及相关插件**
 
-## 移动网络断网重连
-
-这个小工具能自动监测网络状态，并在掉线后能自动重连。（仅适用于中南大学中国移动网络）
-
-此版本针对于 Linux 平台编写，并且需要用户自行设计计时器反复调用，已针对Python2与Python3进行优化。
-
-**多平台**
-
-Linux：<https://github.com/wolfbolin/csu-keep-online>
-
-MacOS：<https://github.com/fr0der1c/always-online>
-
-操作说明见相关文件夹
