@@ -39,3 +39,11 @@ key_data = {
   "jrdqtlqk": [],
   "jrdqjcqk": []
 }
+
+user_list = [
+  {
+    "time": 1025,  # 表示 上午十点二十五分
+    "username": "wolfbolin",
+    "password": "wolfbolin_passwd"
+  }
+]

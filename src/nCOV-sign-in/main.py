@@ -7,7 +7,7 @@ from my_config import sign_data
 
 
 def main():
-    sign_time = 1010   # 表示 十点十分 开始发起签到
+    sign_time = 1025   # 表示 上午十点二十五分 开始发起签到
     time_now = int(str_time("%H%M"))
     while time_now < sign_time:
         print("未到指定的签到时间")
