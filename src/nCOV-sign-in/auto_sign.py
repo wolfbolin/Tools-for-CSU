@@ -14,9 +14,10 @@ def main():
         if time_now >= 2358:
             sign_user = set()
             time.sleep(180)
+            continue
         # 全部完成后不再自动尝试签到
         if len(sign_user) >= len(user_list):
-            print("今日已完工，明日自动继续")
+            print("%s 今日已完工，明日自动继续" % str_time("%H:%M"))
             time.sleep(60)
             continue
         # 尝试进行签到
@@ -33,6 +34,8 @@ def main():
                     print("\033[0;32m成功\033[0m<{}>".format(sign_msg[1]))
                 else:
                     print("\033[0;31m失败\033[0m<{}>".format(sign_msg[1]))
+            else:
+                print("\033[0;33m时间未到\033[0m<{}>".format(str_time("%H:%M")))
         time.sleep(1)
 
 
