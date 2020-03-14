@@ -1,3 +1,5 @@
 .idea
 *.json
 __pycache__
+
+src/nCOV-sign-in/auto_sign_sms.py

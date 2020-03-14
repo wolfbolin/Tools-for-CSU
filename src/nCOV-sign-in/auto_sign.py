@@ -44,13 +44,13 @@ def sign_in(user_info):
     if session is None:
         return False, "Get session failed"
     sign_result = auto_sign_in(session)
-    if sign_result is None:
-        return False, "Sign in failed"
+    if not isinstance(sign_result, dict):
+        return False, sign_result
     elif sign_result["e"] == 0:
         return True, sign_result["m"]
     elif sign_result["e"] == 1 and sign_result["m"] == "今天已经填报了":
         return True, sign_result["m"]
-    return False, sign_result
+    return False, sign_result["m"]
 
 
 def auto_login(username, password):
@@ -101,15 +101,34 @@ def auto_sign_in(session):
         http_result = session.post(url)
     except requests.exceptions.ReadTimeout:
         print("requests.exceptions.ReadTimeout:[%s]" % url)
-        return None
+        return "自动登录失败"
     except requests.exceptions.ConnectionError:
         print("requests.exceptions.ConnectionError:[%s]" % url)
-        return None
+        return "自动登录失败"
     regex = r'oldInfo: (.*),'
     re_result = re.search(regex, http_result.text)
     if re_result is None:
-        return None
+        return "缺少历史数据"
     sign_data = json.loads(re_result.group(1))
+    regex = r'var def = (.*);'
+    re_result = re.search(regex, http_result.text)
+    if re_result is None:
+        return "缺少模版数据"
+    def_string = re_result.group(1)
+    def_data = json.loads(def_string)
+    api_string = def_data["geo_api_info"].replace(r'\"', '"')
+    if len(api_string.strip()) == 0:
+        return "缺少定位数据"
+    api_data = json.loads(api_string)
+    sign_data["geo_api_info"] = str(api_string)
+    sign_data["address"] = api_data["formattedAddress"]
+    sign_data["area"] = api_data["addressComponent"]["province"] \
+                        + api_data["addressComponent"]["city"] \
+                        + api_data["addressComponent"]["district"]
+    sign_data["province"] = api_data["addressComponent"]["province"]
+    sign_data["city"] = api_data["addressComponent"]["city"]
+    if sign_data["province"] in ('长沙市', '上海市', '重庆市', '天津市'):
+        sign_data["city"] = sign_data["province"]
 
     # 重发数据完成签到
     url = "https://wxxy.csu.edu.cn/ncov/wap/default/save"
@@ -117,10 +136,10 @@ def auto_sign_in(session):
         http_result = session.post(url, data=sign_data)
     except requests.exceptions.ReadTimeout:
         print("requests.exceptions.ReadTimeout:[%s]" % url)
-        return None
+        return "自动签到失败"
     except requests.exceptions.ConnectionError:
         print("requests.exceptions.ConnectionError:[%s]" % url)
-        return None
+        return "自动签到失败"
     return json.loads(http_result.text)
 
 
