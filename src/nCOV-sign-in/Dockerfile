@@ -11,8 +11,6 @@ RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.li
 	&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 WORKDIR /var/app
-COPY auto_sign.py /var/app
-COPY my_config.py /var/app
 
 RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip \
     && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests

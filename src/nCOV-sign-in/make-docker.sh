@@ -10,7 +10,8 @@ echo -e "\033[5;36mOrz 镜像重建完成\033[0m"
 
 docker run -itd \
 	--restart always \
-	--name ncov_sign\
+	--name ncov_sign \
+	-v $(pwd):/var/app \
 	ncov_sign:"${time_now}"
 echo -e "\033[5;36mOrz 镜像启动完成\033[0m"
 docker ps -a

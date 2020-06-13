@@ -3,3 +3,5 @@
 __pycache__
 
 src/nCOV-sign-in/auto_sign_sms.py
+
+src/nCOV-sign-in/my_config.ini
